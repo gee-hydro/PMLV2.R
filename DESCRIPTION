@@ -19,12 +19,13 @@ Imports:
     rtrend, 
     data.table, 
     hydroTools, rtop,
+    nctools,
     crayon
 Remotes:
     rpkgs/nctools, 
     CUG-hydro/hydroTools
 Suggests: 
-    terra,
+    terra, ncdf4,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)

@@ -61,3 +61,22 @@ print(r)
 varnames(r)
 ```
 
+### Unit of input forcing
+
+**Table 1.** Variables in the PMLV2 model.
+
+| variable | Longname                         | Unit  |
+| -------- | -------------------------------- | ----- |
+| `LAI`    | Leaf are index                   | -     |
+| `Emiss`  | Emissivity                       | -     |
+| `Albedo` | Albedo                           | -     |
+| `Tmax`   | Maximum temperature              | ℃     |
+| `Tmin`   | Minimum temperature              | ℃     |
+| `Tavg`   | Average temperature              | ℃     |
+| `q`      | Specific humidity                | kg/kg |
+| `Rln`    | Downward longwave radiation      | W m-2 |
+| `Rs`     | Downward shortwave radiation     | W m-2 |
+| `Pa`     | Air Pressure                     | kPa   |
+| `U2`     | Wind speed in **<u>2 meter</u>** | m/s   |
+| `Prcp`   | Precipitation                    | mm/d  |
+
