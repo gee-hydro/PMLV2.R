@@ -15,7 +15,7 @@ Description: Simulate evapotranspiration (ET), its three components, and gross p
     165–182. <doi:10.1016/j.rse.2018.12.031>.
 License: MIT + file LICENSE
 Imports:
-    magrittr,
+    magrittr, purrr,
     rtrend, 
     data.table, 
     hydroTools, rtop,

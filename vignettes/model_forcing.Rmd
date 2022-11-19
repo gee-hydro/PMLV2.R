@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# 1. Meteorological forcing
+# 1. Illustration of Meteorological forcing
 
 ```{r setup}
 library(PMLV2)
@@ -37,6 +37,8 @@ Have a look about those data:
 ## 1.1. IGBP
 
 IGBP is from `MCD12Q1_006_IGBP`(<https://developers.google.com/earth-engine/datasets/catalog/MODIS_006_MCD12Q1>).
+
+<https://code.earthengine.google.com/5fb1bd3c6245799c85e993d687dfffb2>
 
 > 0.25°×0.25°, 18 kinds of IGBP, the fraction of each IGBP in a 0.25°×0.25° grid.
 > I prepared this data on the GEE.
@@ -61,7 +63,7 @@ print(r)
 varnames(r)
 ```
 
-### Unit of input forcing
+### 1.2.1. Unit of input forcing
 
 **Table 1.** Variables in the PMLV2 model.
 
@@ -80,3 +82,22 @@ varnames(r)
 | `U2`     | Wind speed in **<u>2 meter</u>** | m/s   |
 | `Prcp`   | Precipitation                    | mm/d  |
 
+
+## 1.3. Prepare input
+
+### 1.3.1. Convert original data into 8-day on the GEE
+
+1. `ERA5L hourly to 8-day`: <https://code.earthengine.google.com/693b6ee233f8cf5dcc7c2e1579631967>
+
+2. `GLDAS 3hourly to 80day`: <https://code.earthengine.google.com/57102f28df2690cdae5b742f97561136>
+
+> You don't have the access to GEE gee_PML2. It will not available until my new paper published.
+
+### 1.3.2. Download them from GEE
+
+```{r}
+# go to GEE
+
+```
+
+### 1.3.3. Tidy downloaded tiff file, and convert them to nc

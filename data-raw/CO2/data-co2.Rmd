@@ -1,0 +1,38 @@
+```{r}
+library(data.table)
+library(sf)
+library(sf2)
+library(magrittr)
+library(lubridate)
+library(usethis)
+
+vars = c("year", "month", "decimal", "average", "average_unc", "trend", "trend_unc")
+
+CO2 <- read.table("data-raw/CO2/co2_mm_gl.txt", header = FALSE) %>% 
+    data.table() %>% 
+    set_colnames(vars)
+    
+date  <- seq(ymd(19800101), ymd(20211201), by = "month")
+dates <- llply(1980:2021, function(year){
+    seq(ymd(sprintf("%d-01-01", year)), length.out = 46, by = 8)
+}) %>% do.call(c, .)
+
+d <- dates %>% {data.table(date = ., year = year(.), month = month(.),
+                           d8 = ceiling((yday(.) - 1)/8) + 1)}
+
+d_CO2 <- merge(d, CO2) %>% cbind(lon = 0, lat = 0) %>%
+    dplyr::rename(CO2 = average) %>%
+    dplyr::select(-decimal, -trend) %>%
+    mutate(date = as.Date(date))
+
+use_data(d_CO2, overwrite = TRUE)
+# fwrite(d[, c(1:4, 6)], "co2_mm_gl_2002-2017_8day.csv")
+```
+
+```{r}
+## shp file
+d_CO2$date %<>% format()
+sp <- df2sp(d_CO2) %>% st_as_sf()
+
+write_sf(sp, "data-raw/shp/co2_mm_gl_200001-202112_8day.shp", overwrite = TRUE)
+```

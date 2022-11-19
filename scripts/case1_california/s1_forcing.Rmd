@@ -1,0 +1,32 @@
+## 1. Target
+
+- `period`: 2000-2021
+- `resolution`: 0.25deg or 0.1deg
+
+```{r}
+library(Ipaper)
+
+# IGBP 2021 not available yet, replace 2021 and 2022 with 2020
+fs <- dir2("H:/global_WB/global_Metro/landcover_perc_G010_IGBP", "*.tif")
+fs
+
+```
+
+
+```{r}
+library(mapview)
+library(sf2)
+
+range1 = c(-93.2, -124.7, 25.5, 49.2)  # small
+range2 = c(-114.0, -124.7, 32.3, 42.2) # big
+
+p1 = st_rect(range1)
+p2 = st_rect(range2) 
+
+mapview(p1) + 
+  mapview(p2)
+```
+
+
+
+## 3. 下载原始的MODIS植被驱动

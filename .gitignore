@@ -7,5 +7,7 @@
 # inst/doc
 
 # dir
-data-raw/
+# data-raw/
+data-raw/shp
+
 inst/PMLV2_forcing_NorthChina/mete_GLDASV21/tiff
