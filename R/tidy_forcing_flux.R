@@ -1,6 +1,5 @@
-
 #' Tidy meteorological forcing of FLUXNET
-#'
+#' 
 #' @param df A data.frame read from FLUXNET
 #' - `Pa`     : kPa
 #' - `Rs`     : W m-2
@@ -20,12 +19,12 @@
 #' - gama
 #' - epsilon
 #' - fval_soil
-#'
+#' 
 #' @references
-#' 1. Convert PAR from MJ/m2/d to umol m-2 s-1, http://www.egc.com/useful_info_lighting.php
-#' 2. https://appgeodb.nancy.inra.fr/biljou/pdf/Allen_FAO1998.pdf
+#' 1. Convert PAR from MJ/m2/d to umol m-2 s-1, <http://www.egc.com/useful_info_lighting.php>
+#' 2. <https://appgeodb.nancy.inra.fr/biljou/pdf/Allen_FAO1998.pdf>
 #' @export
-forcing_tidy_flux <- function(df) # , par
+tidy_forcing_flux <- function(df) # , par
 {
   Pa <- df$Pa # kPa
   Rs <- df$Rs # W m-2

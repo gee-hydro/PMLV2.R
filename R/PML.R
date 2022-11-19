@@ -2,7 +2,7 @@
 #' surface for each time step (16-day).
 #'
 #' This algorithm fits to high resolution data data in GEE.
-#'
+#' 
 #' @param data A data.frame with the columns of
 #' - `Prcp`   : Precipitation, mm
 #' - `Tavg`   : daily average temperature, deg C
@@ -30,7 +30,7 @@
 #' - `rou_a`   :
 #' - `gama`    :
 #' - `epsilon` :
-#'
+#' 
 #' @param par PML_V2 parameters
 #' - `hc`      : canopy height (m)
 #'
@@ -87,33 +87,33 @@ PML <- function(data, par = NULL, V2 = TRUE, CO2 = NULL, ratio = 1, return.Es = 
 
   if (is.null(par)) {
     # ind <- match(data$IGBPname, IGBPnames_005)
-    ind <- IGBPcode + 1
+    ind    <- IGBPcode + 1
 
-    Alpha <- options_param$Alpha[ind] # initial photochemical efficiency, 0.02-0.08
+    Alpha  <- options_param$Alpha[ind] # initial photochemical efficiency, 0.02-0.08
     Thelta <- options_param$Thelta[ind] #
-    m <- options_param$m[ind] # Ball-Berry coefficient 2-20
-    Am_25 <- options_param$Am_25[ind] # 10 - 150
-    D0 <- options_param$D0[ind]
-    kQ <- options_param$kQ[ind]
-    kA <- options_param$kA[ind]
-    S_sls <- options_param$S_sls[ind]
-    fER0 <- options_param$fER0[ind]
+    m      <- options_param$m[ind] # Ball-Berry coefficient 2-20
+    Am_25  <- options_param$Am_25[ind] # 10 - 150
+    D0     <- options_param$D0[ind]
+    kQ     <- options_param$kQ[ind]
+    kA     <- options_param$kA[ind]
+    S_sls  <- options_param$S_sls[ind]
+    fER0   <- options_param$fER0[ind]
     VPDmin <- options_param$VPDmin[ind]
     VPDmax <- options_param$VPDmax[ind]
-    hc <- options_param$hc_raw[ind]
+    hc     <- options_param$hc_raw[ind]
   } else {
     # parnames = c("Alpha", "Thelta", "m", "Am_25", "D0", "kQ", "kA", "S_sls", "fER0", "VPDmin", "VPDmax")
     if (is.null(names(par))) par %<>% set_names(param0_PML$name)
     # works for vec, data.frame, data.table or list
-    Alpha <- par[["Alpha"]] # initial photochemical efficiency, 0.02-0.08
+    Alpha  <- par[["Alpha"]] # initial photochemical efficiency, 0.02-0.08
     Thelta <- par[["Thelta"]] #
-    m <- par[["m"]] # Ball-Berry coefficient 2-20
-    Am_25 <- par[["Am_25"]] # 10 - 150
-    D0 <- par[["D0"]]
-    kQ <- par[["kQ"]]
-    kA <- par[["kA"]]
-    S_sls <- par[["S_sls"]]
-    fER0 <- par[["fER0"]]
+    m      <- par[["m"]] # Ball-Berry coefficient 2-20
+    Am_25  <- par[["Am_25"]] # 10 - 150
+    D0     <- par[["D0"]]
+    kQ     <- par[["kQ"]]
+    kA     <- par[["kA"]]
+    S_sls  <- par[["S_sls"]]
+    fER0   <- par[["fER0"]]
     VPDmin <- par[["VPDmin"]]
     VPDmax <- par[["VPDmax"]]
 
@@ -121,14 +121,14 @@ PML <- function(data, par = NULL, V2 = TRUE, CO2 = NULL, ratio = 1, return.Es = 
   }
 
   ## 2. ASSIGN INPUT VARIABLES
-  Prcp <- data$Prcp # mm/d
-  Tavg <- data$Tavg # degC
-  Rs <- data$Rs # W m-2
-  Pa <- data$Pa # kPa
-  u2 <- data$U2 # m/s
-  LAI <- data$LAI # m2 m-2
+  Prcp    <- data$Prcp # mm/d
+  Tavg    <- data$Tavg # degC
+  Rs      <- data$Rs # W m-2
+  Pa      <- data$Pa # kPa
+  u2      <- data$U2 # m/s
+  LAI     <- data$LAI # m2 m-2
 
-  PAR <- 0.45 * Rs # W m-2, taken as 0.45 time of solar radiation
+  PAR     <- 0.45 * Rs # W m-2, taken as 0.45 time of solar radiation
   PAR_mol <- PAR * 4.57 # 1 W m-2 = 4.57 umol m-2 s-1
 
   Rn <- data$Rn # W m-2
@@ -149,12 +149,12 @@ PML <- function(data, par = NULL, V2 = TRUE, CO2 = NULL, ratio = 1, return.Es = 
   Eeq <- data$Eeq
 
   if (is.null(rou_a)) {
-    rou_a <- 3.846 * 10^3 * Pa / (Tavg + 273.15)
-    gama <- Cp * Pa / (0.622 * lambda)
-    slop <- cal_slope(Tavg) # kPa deg-1
+    rou_a   <- 3.846 * 10^3 * Pa / (Tavg + 273.15)
+    gama    <- Cp * Pa / (0.622 * lambda)
+    slop    <- cal_slope(Tavg) # kPa deg-1
     epsilon <- slop / gama
-    Eeq <- epsilon / (epsilon + 1) * Rn / lambda * 86400 * 10^-3 # W m-2 to mm
-    Eeq <- clamp_min(Eeq, 0.0001)
+    Eeq     <- epsilon / (epsilon + 1) * Rn / lambda * 86400 * 10^-3 # W m-2 to mm
+    Eeq     <- clamp_min(Eeq, 0.0001)
   }
 
   ## 3. PML_V2 GPP and Canopy conductance (Gc)
@@ -214,7 +214,7 @@ PML <- function(data, par = NULL, V2 = TRUE, CO2 = NULL, ratio = 1, return.Es = 
   # Tou(find(LAI<=0.001))= 1;
   Tou <- exp(-kA * LAI)
 
-  d <- 0.64 * hc
+  d   <- 0.64 * hc
   zom <- 0.13 * hc
   zoh <- 0.10 * zom
   # Aerodynamic conductance (Leuning, 2008, Eq.13, doi:10.1029/2007WR006562)
@@ -226,9 +226,9 @@ PML <- function(data, par = NULL, V2 = TRUE, CO2 = NULL, ratio = 1, return.Es = 
   # Transpiration from plant cause by aerodynamic water transfer
   LEca <- (rou_a * Cp * Ga * VPD / gama) / (epsilon + 1 + Ga / Gc) # W m-2
 
-  Ecr <- LEcr / lambda * 86400 * 10^-3 # [W m-2] change to [mm d-1]
-  Eca <- LEca / lambda * 86400 * 10^-3 # [W m-2] change to [mm d-1]
-  Ec <- Ecr + Eca
+  Ecr  <- LEcr / lambda * 86400 * 10^-3 # [W m-2] change to [mm d-1]
+  Eca  <- LEca / lambda * 86400 * 10^-3 # [W m-2] change to [mm d-1]
+  Ec   <- Ecr + Eca
 
   ## 5. Intercepted Evaporation (Ei)
   # van Dijk, A.I.J.M, 2001, Eq2.
