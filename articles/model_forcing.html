@@ -83,8 +83,16 @@
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">PMLV2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Registered S3 method overwritten by 'Ipaper':</span></span>
+<span><span class="co">#&gt;   method           from      </span></span>
+<span><span class="co">#&gt;   print.data.table data.table</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; terra 1.6.17</span></span>
+<span><span class="co">#&gt; terra 1.6.41</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'terra'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:magrittr':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     extract, inset</span></span>
 <span></span>
 <span><span class="va">dir_root</span> <span class="op">=</span> <span class="st">"PMLV2_forcing_NorthChina/MCD12Q1_006_IGBP/"</span></span>
 <span></span>
@@ -155,6 +163,81 @@ with the variables of:</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html" class="external-link">varnames</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "LAI"    "Emiss"  "Albedo" "Tmax"   "Tmin"   "Tavg"   "q"      "Rln"   </span></span>
 <span><span class="co">#&gt;  [9] "Rs"     "Pa"     "U2"     "Prcp"</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="unit-of-input-forcing">Unit of input forcing<a class="anchor" aria-label="anchor" href="#unit-of-input-forcing"></a>
+</h4>
+<p><strong>Table 1.</strong> Variables in the PMLV2 model.</p>
+<table class="table">
+<thead><tr class="header">
+<th>variable</th>
+<th>Longname</th>
+<th>Unit</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>LAI</code></td>
+<td>Leaf are index</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>Emiss</code></td>
+<td>Emissivity</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><code>Albedo</code></td>
+<td>Albedo</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>Tmax</code></td>
+<td>Maximum temperature</td>
+<td>℃</td>
+</tr>
+<tr class="odd">
+<td><code>Tmin</code></td>
+<td>Minimum temperature</td>
+<td>℃</td>
+</tr>
+<tr class="even">
+<td><code>Tavg</code></td>
+<td>Average temperature</td>
+<td>℃</td>
+</tr>
+<tr class="odd">
+<td><code>q</code></td>
+<td>Specific humidity</td>
+<td>kg/kg</td>
+</tr>
+<tr class="even">
+<td><code>Rln</code></td>
+<td>Downward longwave radiation</td>
+<td>W m-2</td>
+</tr>
+<tr class="odd">
+<td><code>Rs</code></td>
+<td>Downward shortwave radiation</td>
+<td>W m-2</td>
+</tr>
+<tr class="even">
+<td><code>Pa</code></td>
+<td>Air Pressure</td>
+<td>kPa</td>
+</tr>
+<tr class="odd">
+<td><code>U2</code></td>
+<td>Wind speed in <strong><u>2 meter</u></strong>
+</td>
+<td>m/s</td>
+</tr>
+<tr class="even">
+<td><code>Prcp</code></td>
+<td>Precipitation</td>
+<td>mm/d</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
   </div>
