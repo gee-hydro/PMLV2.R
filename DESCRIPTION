@@ -17,7 +17,12 @@ License: MIT + file LICENSE
 Imports:
     magrittr,
     rtrend, 
-    data.table
+    data.table, 
+    hydroTools, rtop,
+    crayon
+Remotes:
+    rpkgs/nctools, 
+    CUG-hydro/hydroTools
 Suggests: 
     terra,
     knitr,
