@@ -14,6 +14,49 @@ knitr::opts_chunk$set(
 )
 ```
 
+# 1. Meteorological forcing
+
 ```{r setup}
 library(PMLV2)
+library(terra)
+
+dir_root = "PMLV2_forcing_NorthChina/MCD12Q1_006_IGBP/"
+
+indir <- system.file("PMLV2_forcing_NorthChina/MCD12Q1_006_IGBP/", package = "PMLV2")
+fs_lc <- dir(indir, "*.tif", full.names = TRUE)
+
+indir <- system.file("PMLV2_forcing_NorthChina/mete_GLDASV21/", package = "PMLV2")
+fs_mete <- dir(indir, "*.nc", full.names = TRUE)
+
+print(basename(fs_lc))
+print(basename(fs_mete))
+```
+
+Have a look about those data: 
+
+## 1.1. IGBP
+
+IGBP is from `MCD12Q1_006_IGBP`(<https://developers.google.com/earth-engine/datasets/catalog/MODIS_006_MCD12Q1>).
+
+> 0.25°×0.25°, 18 kinds of IGBP, the fraction of each IGBP in a 0.25°×0.25° grid.
+> I prepared this data on the GEE.
+
+```{r}
+r = rast(fs_lc[1])
+print(r)
+names(r)
+```
+
+## 1.2. Meteorological forcing
+
+`PMLV2_forcing_NorthChina_GLDASV21_2000.nc` is a ncfile, with the variables of:
+
+`c("LAI", "Emiss", "Albedo", "Tmax", "Tmin", "Tavg", "q", "Rln", "Rs", "Pa", "U2", "Prcp")`
+
+> I prepared this data also on the GEE.
+
+```{r}
+r = rast(fs_mete[1])
+print(r)
+varnames(r)
 ```
