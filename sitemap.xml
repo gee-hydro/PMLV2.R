@@ -22,9 +22,45 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/PML.html</loc>
+  </url>
+  <url>
     <loc>/reference/PMLV2-package.html</loc>
   </url>
   <url>
+    <loc>/reference/PML_calib.html</loc>
+  </url>
+  <url>
+    <loc>/reference/PML_yearly_LargeGrid2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/PML_years.html</loc>
+  </url>
+  <url>
+    <loc>/reference/forcing_tidy_flux.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_Rn.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_VPD.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_lambda.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/param0_PML.html</loc>
+  </url>
+  <url>
+    <loc>/reference/parameters_2GEE.html</loc>
+  </url>
+  <url>
+    <loc>/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tidy_forcing_yearly.html</loc>
   </url>
 </urlset>
