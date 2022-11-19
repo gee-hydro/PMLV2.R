@@ -4,20 +4,22 @@ Version: 0.1.0.9000
 Authors@R: c(
   person("Dongdong", "Kong", role = c("aut", "cre"), 
          email = "kongdd.sysu@gmail.com", comment = c(ORCID = "0000-0003-1836-8172")))
-Description: Penman-Monteith-Leuning Evapotranspiration V2 (PML_V2) simutate 
-    evapotranspiration (ET), its three components, and gross primary product (GPP).
-    The PML_V2 products perform well against observations at 95 flux sites across 
-    globe, and are similar to or noticeably better than major state-of-the-art ET 
-    and GPP products widely used by water and ecology science communities.
+Description: Simulate evapotranspiration (ET), its three components, and gross primary product (GPP).
+    This model performs well against observations at 95 flux sites across
+    the globe. They are similar to or noticeably better than major state-of-the-art
+    ET and GPP products widely used by water and ecology science communities.
     Reference: 
     Zhang, Y., Kong, D., Gan, R., Chiew, F. H. S., McVicar, T. R., Zhang, Q., & Yang, Y. (2019). 
     Coupled estimation of 500 m and 8-day resolution global evapotranspiration and 
     gross primary production in 2002–2017. Remote Sensing of Environment, 222, 
-    165–182. <doi:10.1016/j.rse.2018.12.031>
+    165–182. <doi:10.1016/j.rse.2018.12.031>.
 License: MIT + file LICENSE
 Imports:
-    magrittr
+    magrittr,
+    rtrend, 
+    data.table
 Suggests: 
+    terra,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
@@ -26,4 +28,3 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.2
 VignetteBuilder: knitr
-

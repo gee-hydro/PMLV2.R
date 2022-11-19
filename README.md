@@ -1,14 +1,14 @@
 
-# Penman-Monteith-Leuning Evapotranspiration model V2 in R
+# Penman-Monteith-Leuning Evapotranspiration V2 in R
 
 > Dongdong Kong, CUG
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/rpkgs/PMLV2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rpkgs/PMLV2/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/rpkgs/rpkg.template/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rpkgs/rpkg.template)
-<!-- [![CRAN](http://www.r-pkg.org/badges/version/rpkg.template)](https://cran.r-project.org/package=rpkg.template) -->
-<!-- [![total](http://cranlogs.r-pkg.org/badges/grand-total/rpkg.template)](https://www.rpackages.io/package/rpkg.template) -->
-<!-- [![monthly](http://cranlogs.r-pkg.org/badges/rpkg.template)](https://www.rpackages.io/package/rpkg.template) -->
+[![R-CMD-check](https://github.com/gee-hydro/pml_california/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gee-hydro/pml_california/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/gee-hydro/pml_california/branch/master/graph/badge.svg)](https://app.codecov.io/gh/gee-hydro/pml_california)
+<!-- [![CRAN](http://www.r-pkg.org/badges/version/PMLV2)](https://cran.r-project.org/package=PMLV2) -->
+<!-- [![total](http://cranlogs.r-pkg.org/badges/grand-total/PMLV2)](https://www.rpackages.io/package/PMLV2) -->
+<!-- [![monthly](http://cranlogs.r-pkg.org/badges/PMLV2)](https://www.rpackages.io/package/PMLV2) -->
 <!-- badges: end -->
 
 ## Installation

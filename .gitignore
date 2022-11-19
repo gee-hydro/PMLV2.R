@@ -4,4 +4,7 @@
 
 */temp
 */*/temp
-inst/doc
+# inst/doc
+
+# dir
+data-raw/
