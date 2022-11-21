@@ -8,12 +8,13 @@ surface for each time step (16-day).}
 PML(
   data,
   par = NULL,
-  V2 = TRUE,
   CO2 = NULL,
+  IGBPname = NULL,
   ratio = 1,
-  return.Es = TRUE,
-  IGBPcode = NULL,
-  scale = c("site", "regional")
+  ...,
+  scale = c("site", "regional"),
+  V2 = TRUE,
+  return.Es = TRUE
 )
 }
 \arguments{
@@ -56,7 +57,7 @@ parameter.
 \item \code{epsilon} :
 }}
 
-\item{par}{PML_V2 parameters
+\item{par}{PML_V2 parameters (see Zhang 2019 for details).
 \itemize{
 \item \code{hc}      : canopy height (m)
 \item \code{Alpha}   : initial photochemical efficiency, 0.02-0.08
@@ -71,16 +72,16 @@ parameter.
 \item \code{VPDmax}  :
 }}
 
-\item{V2}{Run PML_V2? If false, PML_V1 will be used.}
-
 \item{CO2}{A constant number. If provided, CO2 in the \code{data} will be replaced.}
+
+\item{IGBPname}{IGBPname}
 
 \item{ratio}{land cover ratio}
 
+\item{V2}{Boolean, default \code{TRUE}. If \code{TRUE} \code{PML_V2} used, otherwise \code{PML_V1}.}
+
 \item{return.Es}{Because \code{fval_soil} need moving average in temporal. We can't
 get it directly if the \code{data} is Spatial pixels.}
-
-\item{IGBPname}{IGBPname (not used)}
 }
 \value{
 \itemize{

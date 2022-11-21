@@ -32,7 +32,8 @@ add_ETsum <- function(l) {
 }
 
 nc_add_Es <- function(file, frame = 3, grid_type = "mat") {
-  l <- ncread(file, c("Pi", "Es_eq"), ntime = -1, grid_type = grid_type)
+  # ! bug might exist here
+  l <- ncread(file, c("Pi", "Es_eq")) # , ntime = -1, grid_type = grid_type
 
   fval_soil <- add_fvalSoil(l$data$Pi, l$data$Es_eq, frame)
   Es <- fval_soil * l$data$Es_eq

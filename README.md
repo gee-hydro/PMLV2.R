@@ -33,10 +33,8 @@ remotes::install_github("gee-hydro/PMLV2")
 
 ## Example
 
-``` r
-library(PMLV2)
-## basic example code
-```
+See [run_model.Rmd](scripts/case1_NorthChina/run_model.Rmd).
+
 
 ## References
 

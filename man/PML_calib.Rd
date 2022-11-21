@@ -62,7 +62,7 @@ Otherwise, \code{IGBPcode} should be provided.}
 
 \item{maxn}{ the maximum number of function evaluations}
 
-\item{par}{PML_V2 parameters
+\item{par}{PML_V2 parameters (see Zhang 2019 for details).
 \itemize{
 \item \code{hc}      : canopy height (m)
 \item \code{Alpha}   : initial photochemical efficiency, 0.02-0.08

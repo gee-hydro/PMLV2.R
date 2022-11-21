@@ -1,0 +1,51 @@
+---
+title: "run_model"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{run_model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# 1. Library pkgs
+```{r}
+library(PMLV2)
+library(terra)
+# only focus on grids inside `poly`
+# poly <- sf::read_sf("D:/Documents/ArcGIS/china/bou2_4p_ChinaProvince.shp") %>%
+#     subset(NAME %in% c("河南省", "河北省", "山东省", "天津市", "北京市")) %>%
+#     vect()
+```
+
+# 2. Run model
+```{r}
+i = 1
+indir <- system.file("PMLV2_forcing_NorthChina/MCD12Q1_006_IGBP/", package = "PMLV2")
+fs_lc <- dir(indir, "*.tif", full.names = TRUE)
+
+indir   <- system.file("PMLV2_forcing_NorthChina/mete_GLDASV21/", package = "PMLV2")
+fs_mete <- dir(indir, "*.nc", full.names = TRUE)
+
+f_lc   <- fs_lc[i]
+f_mete <- fs_mete[i]
+
+outfile = "PMLV2_2019.nc"
+PML_region(f_mete, f_lc, outfile)
+```
+
+# 3. Show output 
+```{r}
+r <- rast(outfile)
+plot(r["ET"][[1:10]])
+```
+
+```{r, echo=FALSE}
+status = file.remove(outfile)
+```

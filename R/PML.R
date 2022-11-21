@@ -31,9 +31,8 @@
 #' - `gama`    :
 #' - `epsilon` :
 #' 
-#' @param par PML_V2 parameters
+#' @param par PML_V2 parameters (see Zhang 2019 for details).
 #' - `hc`      : canopy height (m)
-#'
 #' - `Alpha`   : initial photochemical efficiency, 0.02-0.08
 #' - `m`       : the initla slope of CO2 response curve `[umol m-2 s-1]/[umol mol-1]`
 #' - `Am_25`   : 10 - 150
@@ -45,12 +44,12 @@
 #' - `VPDmin`  :
 #' - `VPDmax`  :
 #'
-#' @param V2 Run PML_V2? If false, PML_V1 will be used.
+#' @param V2 Boolean, default `TRUE`. If `TRUE` `PML_V2` used, otherwise `PML_V1`.
 #' @param CO2 A constant number. If provided, CO2 in the `data` will be replaced.
 #' @param ratio land cover ratio
 #' @param return.Es Because `fval_soil` need moving average in temporal. We can't
 #' get it directly if the `data` is Spatial pixels.
-#' @param IGBPname IGBPname (not used)
+#' @param IGBPname IGBPname
 #'
 #' @return
 #' - `GPP`: gC m-2 d-1, Gross primary product
@@ -72,8 +71,10 @@
 #' 3. basic units change, <http://www.fao.org/docrep/X0490E/x0490e0i.htm>
 #'
 #' @export
-PML <- function(data, par = NULL, V2 = TRUE, CO2 = NULL, ratio = 1, return.Es = TRUE,
-                IGBPcode = NULL, scale = c("site", "regional")) {
+PML <- function(
+  data, par = NULL, CO2 = NULL, IGBPname = NULL, ratio = 1, ..., 
+  scale = c("site", "regional"), V2 = TRUE, return.Es = TRUE) 
+{
   scale <- match.arg(scale)
   # 380, 475, 570# umol mol-1,475; #data$CO2
   Ca <- if (is.null(CO2)) data$CO2 else CO2
@@ -85,10 +86,9 @@ PML <- function(data, par = NULL, V2 = TRUE, CO2 = NULL, ratio = 1, return.Es = 
   kA <- 0.7 # extinction coefficient
   LAIref <- 5 # par[10);  # 1-5
 
-  if (is.null(par)) {
-    # ind <- match(data$IGBPname, IGBPnames_005)
-    ind    <- IGBPcode + 1
+  ind <- match(IGBPname, options_param$IGBPname) # index of options_param
 
+  if (is.null(par)) {
     Alpha  <- options_param$Alpha[ind] # initial photochemical efficiency, 0.02-0.08
     Thelta <- options_param$Thelta[ind] #
     m      <- options_param$m[ind] # Ball-Berry coefficient 2-20
@@ -117,7 +117,7 @@ PML <- function(data, par = NULL, V2 = TRUE, CO2 = NULL, ratio = 1, return.Es = 
     VPDmin <- par[["VPDmin"]]
     VPDmax <- par[["VPDmax"]]
 
-    hc <- ifelse("hc" %in% names(par), par[["hc"]], options_param$hc_raw[IGBPcode + 1])
+    hc <- ifelse("hc" %in% names(par), par[["hc"]], options_param$hc_raw[ind])
   }
 
   ## 2. ASSIGN INPUT VARIABLES
