@@ -20,8 +20,8 @@ check_rast <- function(r, type = "raster") {
     raster = raster::raster,
     terra = terra::rast
   )
-  if (is.character(r) || (type == "raster" && !is.raster(r)) ||
-    (type == "terra" && !is.terra(r))) {
+  if (is.character(r) || (type == "raster" && !raster::is.raster(r)) ||
+    (type == "terra" && !terra::is.terra(r))) {
     r %<>% fun()
   }
   r

@@ -16,8 +16,9 @@ Description: Simulate evapotranspiration (ET), its three components, and gross p
 License: MIT + file LICENSE
 Imports:
     magrittr, purrr,
-    rtrend, terra, 
+    dplyr, lubridate, 
     data.table, 
+    rtrend, terra, 
     hydroTools, rtop,
     nctools,
     crayon
@@ -25,7 +26,7 @@ Remotes:
     rpkgs/nctools, 
     CUG-hydro/hydroTools
 Suggests: 
-    terra, ncdf4,
+    ncdf4,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)

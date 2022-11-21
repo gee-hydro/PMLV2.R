@@ -2,7 +2,7 @@
 #' 
 #' Running one year each time.
 #' 
-#' @importFrom terra time rast
+#' @importFrom terra time rast ext mask
 #' @export
 PML_region <- function(f_mete, f_lc, outfile = NULL, poly = NULL, ..., 
   overwrite = TRUE, verbose = FALSE) 

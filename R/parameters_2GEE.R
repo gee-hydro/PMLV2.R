@@ -17,7 +17,7 @@
 #' parameters_2GEE("data-raw/PMLV2_parameters_20181202_110828.csv")
 #' }
 parameters_2GEE <- function(file) {
-  x <- parameters_toR(file)[, -1]
+  x <- parameters_2R(file)[, -1]
   str <- character()
   for (i in seq_along(x)) {
     var <- names(x)[i]

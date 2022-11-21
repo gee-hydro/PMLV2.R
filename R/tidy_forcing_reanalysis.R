@@ -12,7 +12,7 @@ tif_range <- function(file) {
 #' @param l_static NULL
 tidy_forcing_yearly <- function(file, l_static = NULL,
                                 write2nc = FALSE, overwrite = FALSE) {
-  x <- readGDAL(file, silent = TRUE)
+  x <- rgdal::readGDAL(file, silent = TRUE)
   grps <- 1:46 %>% set_names(1:46)
 
   lst <- lapply(grps, function(i) {
@@ -33,7 +33,7 @@ tidy_forcing_yearly <- function(file, l_static = NULL,
     if (!file.exists(outfile) || overwrite) {
       range <- tif_range(file)
       lst <- purrr::transpose(lst) %>% map(~ do.call(cbind, .) %>% spdata_array(range))
-      year <- str_extract(basename(file), "\\d{4}") %>% as.numeric()
+      year <- stringr::str_extract(basename(file), "\\d{4}") %>% as.numeric()
       dates <- get_modis_date(year)
 
       fprintf("writing %s ...\n", basename(outfile))

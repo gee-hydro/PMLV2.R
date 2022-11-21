@@ -84,12 +84,14 @@ fix_neg <- function(x) {
   return(x)
 }
 
+#' @importFrom dplyr mutate
+#' @importFrom lubridate ymd yday
 add_dn <- function(d, days = 8) {
   if (class(d$date)[1] != "Date") {
     d$date %<>% ymd()
   }
 
-  d %<>% plyr::mutate(d, year = year(date), doy = yday(date))
+  d %<>% mutate(d, year = year(date), doy = yday(date))
 
   days <- floor(days)
   for (i in seq_along(days)) {
@@ -103,4 +105,65 @@ add_dn <- function(d, days = 8) {
 #' @importFrom purrr map
 trans_list <- function(l) {
   purrr::transpose(l) %>% map(~ do.call(cbind, .))
+}
+
+dt_round <- function(d, digits = 2) {
+  mutate(d, across(where(is.double), ~ round(.x, digits)))
+}
+
+melt_list <- function(list, ..., na.rm = TRUE) {
+  list <- rm_empty(list)
+  if (is.null(list) || length(list) == 0) {
+    return(NULL)
+  }
+  n <- length(list)
+  params <- list(...)
+  key <- names(params)[1]
+  vals <- params[[1]]
+  if (is.null(key)) {
+    key <- vals
+    vals <- names(list)
+  }
+  if (is.null(vals)) {
+    vals <- seq_along(list)
+  }
+  if (length(vals) == 1) {
+    vals <- rep(vals, n)
+  }
+  if (is.character(vals)) {
+    vals %<>% as.factor()
+  }
+  first <- list[[1]]
+  if (is.data.frame(first)) {
+    for (i in seq_along(list)) {
+      x <- list[[i]]
+      eval(parse(text = sprintf("x$%s <- vals[i]", key)))
+      list[[i]] <- x
+    }
+    res <- do.call(rbind, list) %>% data.table()
+  }
+  res %>% dplyr::relocate(key)
+}
+
+runningId <- function(i, step = 1, N, prefix = "") {
+  perc <- ifelse(missing(N), "", sprintf(", %.1f%% ", i / N *
+    100))
+  if (mod(i, step) == 0) {
+    cat(sprintf(
+      "[%s] running%s %d ...\n", prefix, perc,
+      i
+    ))
+  }
+}
+
+rm_empty <- function(x) {
+  if (is.list(x)) {
+    x[!sapply(x, is_empty)]
+  } else {
+    x[!is.na(x)]
+  }
+}
+
+which.notna <- function(x) {
+  which(!is.na(x))
 }

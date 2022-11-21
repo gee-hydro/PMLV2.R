@@ -114,6 +114,7 @@ PML_goal <- function(par, data, IGBPcode = NULL, ..., of_gof = NSE, detailed = F
 }
 
 # 为了最后的结果展示
+#' @importFrom dplyr mutate
 cal_gof <- function(df, by = "IGBP") {
   .cal_gof <- function(df) {
     ans <- df[, GOF(yobs, ysim), by = by] %>%
