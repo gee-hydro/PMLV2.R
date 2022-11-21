@@ -60,12 +60,13 @@ surface for each time step (16-day).</h1>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">PML</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  par <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  V2 <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  CO2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  IGBPname <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ratio <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  return.Es <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  IGBPcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"regional"</span><span class="op">)</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"regional"</span><span class="op">)</span>,</span>
+<span>  V2 <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  return.Es <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -95,7 +96,7 @@ parameter.</p></li>
 
 
 <dt>par</dt>
-<dd><p>PML_V2 parameters</p><ul><li><p><code>hc</code>      : canopy height (m)</p></li>
+<dd><p>PML_V2 parameters (see Zhang 2019 for details).</p><ul><li><p><code>hc</code>      : canopy height (m)</p></li>
 <li><p><code>Alpha</code>   : initial photochemical efficiency, 0.02-0.08</p></li>
 <li><p><code>m</code>       : the initla slope of CO2 response curve <code>[umol m-2 s-1]/[umol mol-1]</code></p></li>
 <li><p><code>Am_25</code>   : 10 - 150</p></li>
@@ -109,25 +110,25 @@ parameter.</p></li>
 </ul></dd>
 
 
-<dt>V2</dt>
-<dd><p>Run PML_V2? If false, PML_V1 will be used.</p></dd>
-
-
 <dt>CO2</dt>
 <dd><p>A constant number. If provided, CO2 in the <code>data</code> will be replaced.</p></dd>
+
+
+<dt>IGBPname</dt>
+<dd><p>IGBPname</p></dd>
 
 
 <dt>ratio</dt>
 <dd><p>land cover ratio</p></dd>
 
 
+<dt>V2</dt>
+<dd><p>Boolean, default <code>TRUE</code>. If <code>TRUE</code> <code>PML_V2</code> used, otherwise <code>PML_V1</code>.</p></dd>
+
+
 <dt>return.Es</dt>
 <dd><p>Because <code>fval_soil</code> need moving average in temporal. We can't
 get it directly if the <code>data</code> is Spatial pixels.</p></dd>
-
-
-<dt>IGBPname</dt>
-<dd><p>IGBPname (not used)</p></dd>
 
 </dl></div>
     <div id="value">
