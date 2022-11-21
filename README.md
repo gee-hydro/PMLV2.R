@@ -12,6 +12,17 @@
 <!-- badges: end -->
 
 
+## TODO
+
+- [ ] 以NorthChina为输入，测试PMLV2的核心代码；
+
+- [ ] 截取通量站驱动数据，重新率定模型参数（Options: ERA5L, GLDASv2.1, GLDASv2.2, CFSV2, MERRA2）；
+  
+- [ ] 等待GEE跑完Albedo，然后进行插值处理；
+
+- [ ] 从GEE截取驱动数据，tiff转nc；
+
+
 ## Installation
 
 You can install the development version of `PMLV2` like so:
@@ -28,7 +39,6 @@ library(PMLV2)
 ```
 
 ## References
-
 
 1. Zhang, Y., Kong, D., Gan, R., Chiew, F. H. S., McVicar, T. R., Zhang, Q., & Yang, Y. (2019). Coupled estimation of 500 m and 8-day resolution global evapotranspiration and gross primary production in 2002–2017. Remote Sensing of Environment, 222, 165–182. <https://doi.org/10.1016/j.rse.2018.12.031>
 
