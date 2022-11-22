@@ -10,6 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  fig.width = 8, 
+  fig.height = 6,
   comment = "#>"
 )
 ```
@@ -18,10 +20,6 @@ knitr::opts_chunk$set(
 ```{r}
 library(PMLV2)
 library(terra)
-# only focus on grids inside `poly`
-# poly <- sf::read_sf("D:/Documents/ArcGIS/china/bou2_4p_ChinaProvince.shp") %>%
-#     subset(NAME %in% c("河南省", "河北省", "山东省", "天津市", "北京市")) %>%
-#     vect()
 ```
 
 # 2. Run model

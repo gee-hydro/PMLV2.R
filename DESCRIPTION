@@ -28,6 +28,7 @@ Remotes:
 Suggests: 
     ncdf4,
     knitr,
+    pracma,
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
