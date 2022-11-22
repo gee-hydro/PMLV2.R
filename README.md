@@ -4,8 +4,8 @@
 > Dongdong Kong, CUG
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/gee-hydro/pml_california/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gee-hydro/pml_california/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/gee-hydro/pml_california/branch/master/graph/badge.svg)](https://app.codecov.io/gh/gee-hydro/pml_california)
+[![R-CMD-check](https://github.com/gee-hydro/PML.R/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gee-hydro/PML.R/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/gee-hydro/PML.R/branch/master/graph/badge.svg)](https://app.codecov.io/gh/gee-hydro/PML.R)
 <!-- [![CRAN](http://www.r-pkg.org/badges/version/PMLV2)](https://cran.r-project.org/package=PMLV2) -->
 <!-- [![total](http://cranlogs.r-pkg.org/badges/grand-total/PMLV2)](https://www.rpackages.io/package/PMLV2) -->
 <!-- [![monthly](http://cranlogs.r-pkg.org/badges/PMLV2)](https://www.rpackages.io/package/PMLV2) -->
@@ -14,14 +14,13 @@
 
 ## TODO
 
-- [ ] 以NorthChina为输入，测试PMLV2的核心代码；
-
-- [ ] 截取通量站驱动数据，重新率定模型参数（Options: ERA5L, GLDASv2.1, GLDASv2.2, CFSV2, MERRA2）；
+- [x] 以NorthChina为输入，测试PMLV2的核心代码；
   
-- [ ] 等待GEE跑完Albedo，然后进行插值处理；
+- [ ] 植被驱动数据，等待GEE跑完Albedo，然后进行线性插值、历史平均插值处理；
 
-- [ ] 从GEE截取驱动数据，tiff转nc；
+- [ ] 气象驱动数据，从GEE截取，tiff转nc；
 
+- [ ] 模型参数率定，截取通量站驱动数据，重新率定模型参数（ERA5L, GLDASv2.1, GLDASv2.2, CFSV2, MERRA2）；
 
 ## Installation
 
@@ -33,18 +32,22 @@ remotes::install_github("gee-hydro/PMLV2")
 
 ## Example
 
-See [run_model.Rmd](scripts/case1_NorthChina/run_model.Rmd).
+See the following instruction:
+
+<https://gee-hydro.github.io/PML.R/articles/model_forcing.html>
+
+<https://gee-hydro.github.io/PML.R/articles/run_model.html>
 
 
 ## Validation ET
 
 - Basin water balance
 
-<https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations>
+   <https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations>
 
 - Eddy covariance flux
 
-<https://fluxnet.org/data/fluxnet2015-dataset/fullset-data-product>
+   <https://fluxnet.org/data/fluxnet2015-dataset/fullset-data-product>
 
 
 ## References
