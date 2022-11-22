@@ -90,10 +90,10 @@
 <h2 id="todo">TODO<a class="anchor" aria-label="anchor" href="#todo"></a>
 </h2>
 <ul class="task-list">
-<li><p><input type="checkbox" disabled>以NorthChina为输入，测试PMLV2的核心代码；</p></li>
-<li><p><input type="checkbox" disabled>截取通量站驱动数据，重新率定模型参数（Options: ERA5L, GLDASv2.1, GLDASv2.2, CFSV2, MERRA2）；</p></li>
-<li><p><input type="checkbox" disabled>等待GEE跑完Albedo，然后进行插值处理；</p></li>
-<li><p><input type="checkbox" disabled>从GEE截取驱动数据，tiff转nc；</p></li>
+<li><p><input type="checkbox" disabled checked>以NorthChina为输入，测试PMLV2的核心代码；</p></li>
+<li><p><input type="checkbox" disabled>植被驱动数据，等待GEE跑完Albedo，然后进行线性插值、历史平均插值处理；</p></li>
+<li><p><input type="checkbox" disabled>气象驱动数据，从GEE截取，tiff转nc；</p></li>
+<li><p><input type="checkbox" disabled>模型参数率定，截取通量站驱动数据，重新率定模型参数（ERA5L, GLDASv2.1, GLDASv2.2, CFSV2, MERRA2）；</p></li>
 </ul>
 </div>
 <div class="section level2">
@@ -106,19 +106,23 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>See <a href="scripts/case1_NorthChina/run_model.Rmd">run_model.Rmd</a>.</p>
+<p>See the following instruction:</p>
+<p><a href="https://gee-hydro.github.io/PML.R/articles/model_forcing.html" class="external-link uri">https://gee-hydro.github.io/PML.R/articles/model_forcing.html</a></p>
+<p><a href="https://gee-hydro.github.io/PML.R/articles/run_model.html" class="external-link uri">https://gee-hydro.github.io/PML.R/articles/run_model.html</a></p>
 </div>
 <div class="section level2">
 <h2 id="validation-et">Validation ET<a class="anchor" aria-label="anchor" href="#validation-et"></a>
 </h2>
 <ul>
-<li>Basin water balance</li>
-</ul>
+<li>
+<p>Basin water balance</p>
 <p><a href="https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations" class="external-link uri">https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations</a></p>
-<ul>
-<li>Eddy covariance flux</li>
-</ul>
+</li>
+<li>
+<p>Eddy covariance flux</p>
 <p><a href="https://fluxnet.org/data/fluxnet2015-dataset/fullset-data-product" class="external-link uri">https://fluxnet.org/data/fluxnet2015-dataset/fullset-data-product</a></p>
+</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
