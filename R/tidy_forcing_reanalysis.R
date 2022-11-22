@@ -8,8 +8,8 @@ tif_range <- function(file) {
   c(lon_range, lat_range)
 }
 
-#' tidy_forcing_yearly
-#' @param l_static NULL
+# ' tidy_forcing_yearly
+# ' @param l_static NULL
 tidy_forcing_yearly <- function(file, l_static = NULL,
                                 write2nc = FALSE, overwrite = FALSE) {
   x <- rgdal::readGDAL(file, silent = TRUE)

@@ -1,5 +1,5 @@
 
-# Penman-Monteith-Leuning Evapotranspiration V2 in R
+# Penman-Monteith-Leuning Evapotranspiration (ET) Version2 in R
 
 > Dongdong Kong, CUG
 
@@ -34,6 +34,17 @@ remotes::install_github("gee-hydro/PMLV2")
 ## Example
 
 See [run_model.Rmd](scripts/case1_NorthChina/run_model.Rmd).
+
+
+## Validation ET
+
+- Basin water balance
+
+<https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations>
+
+- Eddy covariance flux
+
+<https://fluxnet.org/data/fluxnet2015-dataset/fullset-data-product>
 
 
 ## References

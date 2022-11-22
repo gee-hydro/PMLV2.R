@@ -3,6 +3,7 @@
 #' Running one year each time.
 #' 
 #' @importFrom terra time rast ext mask
+#' @importFrom purrr map
 #' @export
 PML_region <- function(f_mete, f_lc, outfile = NULL, poly = NULL, ..., 
   overwrite = TRUE, verbose = FALSE) 
@@ -14,20 +15,20 @@ PML_region <- function(f_mete, f_lc, outfile = NULL, poly = NULL, ...,
   range = as.vector(ext(s))
   year = year(dates[1]) # one year each time
 
+  I_grid = NULL
   if (!is.null(poly)) {
     r_temp = s["Pa"][[1]] %>% mask(poly)
     I_grid = r_temp %>% rast_array() %>% c() %>% which.notna()
   }
 
-  l_forcing = map(varnames(s) %>% set_names(., .), ~ s[.x] %>%
-    rast_array() %>%
-    array_3dTo2d(I_grid))
+  vars = varnames(s) %>% set_names(., .)
+  l_forcing = map(vars, ~ rast_array(s[.x]) %>% array_3dTo2d(I_grid))
 
   r_lc = rast(f_lc)  
   mat_LC = rast_array(r_lc) %>% array_3dTo2d(I_grid) %>% set_colnames(names(r_lc))
 
   ## 02: run model
-  res <- .PML_region(l_forcing, LC, year, return.Es = FALSE, , verbose = verbose)
+  res <- .PML_region(l_forcing, mat_LC, year, return.Es = FALSE, , verbose = verbose)
   res %<>% add_Es(frame = 3) %>% add_ETsum()
   data = res %>% map(~ array_2dTo3d(.x, I_grid, dim))
 

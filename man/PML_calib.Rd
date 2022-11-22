@@ -58,7 +58,7 @@ parameter.
 \item{IGBPcode}{(optional) If \code{hc_raw} specified in \code{par}, \code{IGBPcode} can be ignored.
 Otherwise, \code{IGBPcode} should be provided.}
 
-\item{...}{arguments for the objective function, must be named}
+\item{...}{ignored}
 
 \item{maxn}{ the maximum number of function evaluations}
 

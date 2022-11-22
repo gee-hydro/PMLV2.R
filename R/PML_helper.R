@@ -24,6 +24,11 @@ add_Es <- function(l, frame = 3) {
   l
 }
 
+#' calculate ETsum
+#' @description 
+#' ET_sum = Ec + Ei + Es$
+#' @param l List object, with the elements at least of `Ecr`, `Eca`, `Ei`, `Es`.
+#' @keywords internal
 #' @export
 add_ETsum <- function(l) {
   l$Ec <- l$Ecr + l$Eca

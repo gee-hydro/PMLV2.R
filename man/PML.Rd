@@ -78,6 +78,10 @@ parameter.
 
 \item{ratio}{land cover ratio}
 
+\item{...}{ignored}
+
+\item{scale}{one of c("site", "regional").}
+
 \item{V2}{Boolean, default \code{TRUE}. If \code{TRUE} \code{PML_V2} used, otherwise \code{PML_V1}.}
 
 \item{return.Es}{Because \code{fval_soil} need moving average in temporal. We can't

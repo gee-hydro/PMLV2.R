@@ -50,7 +50,9 @@
 #' @param return.Es Because `fval_soil` need moving average in temporal. We can't
 #' get it directly if the `data` is Spatial pixels.
 #' @param IGBPname IGBPname
-#'
+#' @param scale one of c("site", "regional").
+#' @param ... ignored
+#' 
 #' @return
 #' - `GPP`: gC m-2 d-1, Gross primary product
 #' - `Ec` : mm d-1, Vegetation transpiration

@@ -22,8 +22,12 @@ NULL
         ".", ".SD", ".N", "..vars",
         "R2", "NSE", "KGE", "R", "RMSE", "Bias_perc", "n_sim", "site", 
         "GPPobs", "ETobs", "GPP", "ET", "GPP_DT", "GPP_NT",
+        "CO2",
         "site", "IGBP", "yobs", "ysim", 
-        "where"
+        "where", 
+        "IGBPname", "IGBPinfo", "variable", "varnames",
+        # data
+        "options_param"
       )
     )
   }
