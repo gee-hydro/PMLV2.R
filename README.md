@@ -51,7 +51,8 @@ See the following instruction:
 
   $$E_{wb} ≈ P - R - \Delta S$$
 
-  1. GRDC, <https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations>
+  1. GRDC streamflow, <https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations>
+  2. USGS streamflow, <https://github.com/DOI-USGS/dataRetrieval/>
 
 - Atmosphere moisture balance
 
