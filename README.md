@@ -46,26 +46,18 @@ See the following instruction:
    <https://fluxnet.org/data/fluxnet2015-dataset/fullset-data-product>
 
 - Basin-scale water balance
+  
+  $$E_{wb} = P - R - \Delta S + RES_s$$
 
-   1. GRDC, <https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations>
+  $$E_{wb} ≈ P - R - \Delta S$$
 
-  $$
-  E_{wb} = P - R - \Delta S + RES_s \\
-  $$
-
-  $$
-  E_{wb} ≈ P - R - \Delta S
-  $$
+  1. GRDC, <https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations>
 
 - Atmosphere moisture balance
 
-  $$
-  E_{atm} = P + Div + \Delta W - RES_w
-  $$
+  $$E_{atm} = P + Div + \Delta W - RES_w$$
 
-  $$
-  E_{atm} ≈ P + Div
-  $$
+  $$E_{atm} ≈ P + Div$$
   
   1. ERA5 monthly, <https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels-monthly-means?tab=form>
 
