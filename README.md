@@ -41,13 +41,33 @@ See the following instruction:
 
 ## Validation ET
 
-- Basin water balance
-
-   <https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations>
-
 - Eddy covariance flux
 
    <https://fluxnet.org/data/fluxnet2015-dataset/fullset-data-product>
+
+- Basin-scale water balance
+
+   1. GRDC, <https://portal.grdc.bafg.de/applications/public.html?publicuser=PublicUser#dataDownload/Stations>
+
+  $$
+  E_{wb} = P - R - \Delta S + RES_s \\
+  $$
+
+  $$
+  E_{wb} ≈ P - R - \Delta S
+  $$
+
+- Atmosphere moisture balance
+
+  $$
+  E_{atm} = P + Div + \Delta W - RES_w
+  $$
+
+  $$
+  E_{atm} ≈ P + Div
+  $$
+  
+  1. ERA5 monthly, <https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels-monthly-means?tab=form>
 
 
 ## References
