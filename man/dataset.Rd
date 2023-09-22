@@ -9,7 +9,7 @@
 \format{
 An object of class \code{data.table} (inherits from \code{data.frame}) with 18 rows and 14 columns.
 
-An object of class \code{data.table} (inherits from \code{data.frame}) with 1932 rows and 9 columns.
+An object of class \code{data.table} (inherits from \code{data.frame}) with 1978 rows and 9 columns.
 }
 \usage{
 options_param
