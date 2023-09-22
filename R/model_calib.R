@@ -1,12 +1,10 @@
 #' Calibration for `PML` model
 #'
 #' @inheritParams PML
-#' @inheritParams rtop::sceua
 #'
 #' @param IGBPcode (optional) [IGBP_006] code. If `hc_raw` specified in `par`, `IGBPcode` can be ignored.
 #' Otherwise, `IGBPcode` should be provided.
 #' 
-#' @importFrom rtop sceua
 #' @export
 PML_calib <- function(data, IGBPcode = 1, of_gof = NSE, ..., verbose = TRUE, maxn = 1e3) {
   # c("Alpha", "Thelta", "m", "Am_25", "D0", "kQ", "kA", "S_sls", "fER0", "VPDmin", "VPDmax")
@@ -26,7 +24,7 @@ PML_calib <- function(data, IGBPcode = 1, of_gof = NSE, ..., verbose = TRUE, max
   #     data = data, IGBPcode = IGBPcode, of_gof = of_gof)$optim$bestmem
   # par = RMPSH::RMPSH_opt(par0, PML_goal, lb, ub,
   #     data = data, IGBPcode = IGBPcode, of_gof = of_gof)
-  # par = sceua(PML_goal, par0, lb, ub, iprint = ifelse(verbose, 0, -1), maxn = maxn,
+  # par = rtop::sceua(PML_goal, par0, lb, ub, iprint = ifelse(verbose, 0, -1), maxn = maxn,
   #                 data = data, IGBPcode = IGBPcode, of_gof = of_gof)$par
   par <- set_names(par, parnames)
   par["hc"] <- options_param$hc_raw[IGBPcode]
@@ -123,6 +121,7 @@ cal_gof <- function(df, by = "IGBP") {
       dplyr::select(IGBP, R2, KGE, NSE, R, RMSE, Bias_perc, n_sim)
     ans
   }
+  
   GPP <- df[, .(yobs = GPPobs, ysim = GPP, IGBP, site)] %>% .cal_gof()
   ET <- df[, .(yobs = ETobs, ysim = ET, IGBP, site)] %>% .cal_gof()
   info <- listk(ET, GPP) %>%

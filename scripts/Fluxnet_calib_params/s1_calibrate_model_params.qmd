@@ -1,0 +1,90 @@
+```{r}
+# library(phenofit)
+library(hydroTools)
+library(Ipaper)
+library(data.table)
+library(dplyr)
+library(rfluxnet)
+# library(ggrepel)
+# library(ggpmisc)
+```
+
+## 1. 准备数据
+
+```{r}
+df_raw <- fread("data-raw/INPUTS/PMLv2_training_forcing_flux_v20200828 (80%)_102sp.csv")
+df_raw$date %<>% as.Date()
+
+# % considering Uz = 15 for fluxsites, and convert to real U2
+df <- df_raw[, .(site, IGBPcode, IGBPname, date, GPP_NT, GPP_DT, LE, LE_CORR,
+  LAI = LAI_sgfitw, LAI_sgfitw, LAI_raw,
+  dhour_norm,
+  Emiss,
+  CO2, Pa, Prcp, Rl_in, Rs, VPD, Tavg, U2 = cal_U2(U2, z.wind = 15), Albedo
+)]
+
+df %<>% tidy_forcing_flux()
+
+## 选择要率定参数的植被类型
+IGBPs <- c("CRO", "DBF", "EBF", "ENF", "GRA", "MF", "OSH", "SAV", "WET", "WSA")
+# IGBPs = c("EBF", "SAV", "WET")#[2]
+# IGBPs = "ENF"
+IGBPinfo <- df[, .(IGBPcode, IGBPname)] %>%
+  unique() %>%
+  .[match(IGBPs, IGBPname), ]
+n <- nrow(IGBPinfo)
+
+df_tmp <- df[IGBPname %in% IGBPs, .(site, IGBP = IGBPname, date, LAI_raw, LAI, LAI_sgfitw)]
+# pb <- progress::progress_bar$new(
+#     format = "[:bar] :percent eta: :eta, in :elapsed", total = n)
+```
+
+## 2. 参数率定
+
+```{r}
+set.seed(1) # 确保每次参数优选结果一致
+
+lst <- foreach(igbp_code = with(IGBPinfo, set_names(IGBPcode, IGBPname)), i = icount()) %do% {
+  runningId(i, prefix = IGBPinfo$IGBPname[i])
+
+  d_obs <- df[IGBPcode == igbp_code]
+  r <- PML_calib(d_obs, igbp_code, verbose = TRUE, maxn = 1e4)
+}
+
+res <- purrr::transpose(lst)[1:2] %>%
+  map(~ melt_list(map(.x, as.data.table), "IGBP"))
+
+res$data[, GOF(ETobs, ET)]
+
+res$data[, GOF(GPPobs, GPP)]
+```
+
+
+## 3. 拟合优度分析
+
+```{r}
+# res$gof %<>% .[match(IGBPs, IGBP), ]
+# # write_list2xlsx(res, "PMLV2_v1.xlsx")
+res_d8 <- merge(res$data, st_flux166 %>% rename(IGBP_org = IGBP),
+  all.x = TRUE, by = "site"
+) %>%
+  mutate(year = year(date) - 1 * (month(date) < 7) * (lat < 0)) # 考虑南半球的年份
+
+res_season <- res_d8 %>%
+  add_dn() %>%
+  .[, lapply(.SD, mean, na.rm = TRUE), .(IGBP, site, d8),
+    .SDcols = c("ET", "ETobs", "GPP", "GPPobs")
+  ]
+
+cat(green("[ALL]:"))
+gof <- list(d8 = res_d8, season = res_season) %>% map(cal_gof)
+gof
+# PML_gof(res_d8, of_gof = KGE) %>% {cat(str(.))}
+
+# write_list2xlsx(gof, "WHIT_Bisquare")
+# write_list2xlsx(gof, "SG_Bisquare_v0")
+
+# raw : 0.674, 0.602
+# SG  : 0.692, 0.75
+# WHIT: 0.682, 0.689
+```

@@ -1,7 +1,7 @@
 #' ET helper
 #' @name ET_helper
-#' 
-#' @description 
+#'
+#' @description
 #' - `get_lambda`: latent heat of vaporization (~2500 J g-1)
 #' - `get_Rn`: net solar radiation (W m-2)
 #' - `get_VPD`: vapor pressure deficit (kPa)
@@ -22,17 +22,17 @@ get_lambda <- function(Tavg) {
 #' @param Rln longwave inward solar radiation, W m-2
 #' @param albedo shortwave albedo, -
 #' @param emiss longwave emissivity, -
-#' 
+#'
 #' @rdname ET_helper
 #' @export
 get_Rn <- function(Rs, Rln, Tavg, albedo, emiss) {
   Stefan <- 4.903e-9 # Stefan-Boltzmann constant [MJ K-4 m-2 day-1],
 
   Rns <- (1 - albedo) * Rs
-  RLout <- emiss * Stefan * (Tavg + 273.15)^4
-  RLout <- RLout / 0.0864 # convert from MJ m-2 d-1 to W/m2
+  RLout <- Stefan * (Tavg + 273.15)^4 / 0.0864 # convert from MJ m-2 d-1 to W/m2
 
-  Rnl <- Rln - RLout
+  ## fix bug at emiss*Rln, 20230922
+  Rnl <- emiss*(Rln - RLout)
   Rn <- pmax(Rns + Rnl, 0) # Rns+Rnl, includenan
   Rn
 }

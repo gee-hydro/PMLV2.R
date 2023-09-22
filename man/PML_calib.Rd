@@ -60,8 +60,6 @@ Otherwise, \code{IGBPcode} should be provided.}
 
 \item{...}{ignored}
 
-\item{maxn}{ the maximum number of function evaluations}
-
 \item{par}{PML_V2 parameters (see Zhang 2019 for details).
 \itemize{
 \item \code{hc}      : canopy height (m)

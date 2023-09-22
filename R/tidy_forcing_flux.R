@@ -45,7 +45,7 @@ tidy_forcing_flux <- function(df) # , par
 
   # 2. add VPD and Rn
   Rn <- get_Rn(df$Rs, df$Rl_in, Tavg, df$Albedo, df$Emiss)
-
+  
   # 2. intermediate variables
   rou_a <- 3.846 * 10^3 * Pa / (Tavg + 273.15) # kg m-3
   gama <- Cp * Pa / (0.622 * lambda) # kpa deg-1
@@ -55,7 +55,7 @@ tidy_forcing_flux <- function(df) # , par
   ## Equilibrium evaporation
   Eeq <- epsilon / (epsilon + 1) * Rn / lambda * 86400 * 10^-3 # mm
   Eeq <- pmax(0.0001, Eeq)
-
+  
   # Evaporation from soil surface
   if (is.null(df$f_value_soil)) {
     kA <- 0.9 # insensitive parameter for PMLv2
