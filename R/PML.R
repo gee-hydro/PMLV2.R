@@ -2,7 +2,7 @@
 #' surface for each time step (16-day).
 #'
 #' This algorithm fits to high resolution data data in GEE.
-#' 
+#'
 #' @param data A data.frame with the columns of
 #' - `Prcp`   : Precipitation, mm
 #' - `Tavg`   : daily average temperature, deg C
@@ -30,7 +30,7 @@
 #' - `rou_a`   :
 #' - `gama`    :
 #' - `epsilon` :
-#' 
+#'
 #' @param par PML_V2 parameters (see Zhang 2019 for details).
 #' - `hc`      : canopy height (m)
 #' - `Alpha`   : initial photochemical efficiency, 0.02-0.08
@@ -49,7 +49,7 @@
 #' @param ratio land cover ratio
 #' @param return.Es Because `fval_soil` need moving average in temporal. We can't
 #' get it directly if the `data` is Spatial pixels.
-#' @param IGBPname IGBPname
+#' @param IGBPcode IGBP006 code
 #' @param scale one of c("site", "regional").
 #' @param ... ignored
 #' 
@@ -74,8 +74,8 @@
 #'
 #' @export
 PML <- function(
-  data, par = NULL, CO2 = NULL, IGBPname = NULL, ratio = 1, ..., 
-  scale = c("site", "regional"), V2 = TRUE, return.Es = TRUE) 
+  data, par = NULL, CO2 = NULL, IGBPcode = NULL, ratio = 1, ...,
+  scale = c("site", "regional"), V2 = TRUE, return.Es = TRUE)
 {
   scale <- match.arg(scale)
   # 380, 475, 570# umol mol-1,475; #data$CO2
@@ -88,8 +88,9 @@ PML <- function(
   kA <- 0.7 # extinction coefficient
   LAIref <- 5 # par[10);  # 1-5
 
-  ind <- match(IGBPname, options_param$IGBPname) # index of options_param
-
+  # ind <- match(IGBPname, options_param$IGBPname) # index of options_param
+  ind = IGBPcode
+  
   if (is.null(par)) {
     Alpha  <- options_param$Alpha[ind] # initial photochemical efficiency, 0.02-0.08
     Thelta <- options_param$Thelta[ind] #

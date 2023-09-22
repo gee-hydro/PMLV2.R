@@ -55,7 +55,7 @@ parameter.
 \item \code{epsilon} :
 }}
 
-\item{IGBPcode}{(optional) If \code{hc_raw} specified in \code{par}, \code{IGBPcode} can be ignored.
+\item{IGBPcode}{(optional) \link{IGBP_006} code. If \code{hc_raw} specified in \code{par}, \code{IGBPcode} can be ignored.
 Otherwise, \code{IGBPcode} should be provided.}
 
 \item{...}{ignored}

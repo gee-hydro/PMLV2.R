@@ -9,7 +9,7 @@ PML(
   data,
   par = NULL,
   CO2 = NULL,
-  IGBPname = NULL,
+  IGBPcode = NULL,
   ratio = 1,
   ...,
   scale = c("site", "regional"),
@@ -74,7 +74,7 @@ parameter.
 
 \item{CO2}{A constant number. If provided, CO2 in the \code{data} will be replaced.}
 
-\item{IGBPname}{IGBPname}
+\item{IGBPcode}{IGBP006 code}
 
 \item{ratio}{land cover ratio}
 

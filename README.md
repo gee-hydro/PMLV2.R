@@ -28,6 +28,9 @@ You can install the development version of `PMLV2` like so:
 
 ``` r
 remotes::install_github("gee-hydro/PMLV2")
+
+pak::pkg_install(c("phenofit"))
+pak::pkg_install(c("rpkgs/rfluxnet", "rpkgs/nctools"))
 ```
 
 ## Example

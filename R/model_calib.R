@@ -3,9 +3,9 @@
 #' @inheritParams PML
 #' @inheritParams rtop::sceua
 #'
-#' @param IGBPcode (optional) If `hc_raw` specified in `par`, `IGBPcode` can be ignored.
+#' @param IGBPcode (optional) [IGBP_006] code. If `hc_raw` specified in `par`, `IGBPcode` can be ignored.
 #' Otherwise, `IGBPcode` should be provided.
-#'
+#' 
 #' @importFrom rtop sceua
 #' @export
 PML_calib <- function(data, IGBPcode = 1, of_gof = NSE, ..., verbose = TRUE, maxn = 1e3) {
@@ -29,7 +29,7 @@ PML_calib <- function(data, IGBPcode = 1, of_gof = NSE, ..., verbose = TRUE, max
   # par = sceua(PML_goal, par0, lb, ub, iprint = ifelse(verbose, 0, -1), maxn = maxn,
   #                 data = data, IGBPcode = IGBPcode, of_gof = of_gof)$par
   par <- set_names(par, parnames)
-  par["hc"] <- options_param$hc_raw[IGBPcode + 1]
+  par["hc"] <- options_param$hc_raw[IGBPcode]
 
   gof <- PML_goal(par, data, detailed = TRUE, of_gof = NSE)
   cat(str(gof))
@@ -109,6 +109,7 @@ PML_gof <- function(dat, of_gof = NSE, detailed = TRUE) {
 #' @import crayon
 PML_goal <- function(par, data, IGBPcode = NULL, ..., of_gof = NSE, detailed = FALSE) {
   dat <- PML_predict(data, par, IGBPcode = IGBPcode)
+  
   # smaller, better
   PML_gof(dat, of_gof = of_gof, detailed = detailed)
 }
