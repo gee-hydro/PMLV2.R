@@ -50,7 +50,7 @@ parameter.
 (optional, for speeding up optimization)
 \itemize{
 \item \code{lambda}  :
-\item \code{rou_a}   :
+\item \code{rho_a}   : air density, \verb{[g m-3]}
 \item \code{gama}    :
 \item \code{epsilon} :
 }}

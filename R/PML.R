@@ -27,7 +27,7 @@
 #'
 #' (optional, for speeding up optimization)
 #' - `lambda`  :
-#' - `rou_a`   :
+#' - `rho_a`   : air density, `[g m-3]`
 #' - `gama`    :
 #' - `epsilon` :
 #'
@@ -146,13 +146,13 @@ PML <- function(
   lambda <- data$lambda
   if (is.null(lambda)) lambda <- get_lambda(Tavg) # [2500 J g-1]
 
-  rou_a <- data$rou_a
+  rho_a <- data$rho_a
   gama <- data$gama
   epsilon <- data$epsilon
   Eeq <- data$Eeq
 
-  if (is.null(rou_a)) {
-    rou_a   <- 3.846 * 10^3 * Pa / (Tavg + 273.15)
+  if (is.null(rho_a)) {
+    rho_a   <- 3.486 * 10^3 * Pa / (1.01 * (Tavg + 273)) # g m-3
     gama    <- Cp * Pa / (0.622 * lambda)
     slop    <- cal_slope(Tavg) # kPa deg-1
     epsilon <- slop / gama
@@ -227,7 +227,7 @@ PML <- function(
   # Transpiration from plant cause by radiation water transfer
   LEcr <- epsilon * Rn * (1 - Tou) / (epsilon + 1 + Ga / Gc) # W m-2
   # Transpiration from plant cause by aerodynamic water transfer
-  LEca <- (rou_a * Cp * Ga * VPD / gama) / (epsilon + 1 + Ga / Gc) # W m-2
+  LEca <- (rho_a * Cp * Ga * VPD / gama) / (epsilon + 1 + Ga / Gc) # W m-2
 
   Ecr  <- LEcr / lambda * 86400 * 10^-3 # [W m-2] change to [mm d-1]
   Eca  <- LEca / lambda * 86400 * 10^-3 # [W m-2] change to [mm d-1]

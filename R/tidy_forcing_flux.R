@@ -15,7 +15,7 @@
 #' - lambda
 #' - Rn
 #' - Eeq
-#' - rou_a
+#' - rho_a
 #' - gama
 #' - epsilon
 #' - fval_soil
@@ -37,7 +37,10 @@ tidy_forcing_flux <- function(df) # , par
 
   lambda <- cal_lambda(Tavg) * 1000 # MJ kg-1 to J g-1
   # 1. obs ET and GPP
+  # LE_CORR: 空值太多，因此没有采用
+  # ETobs <- df$LE_CORR / lambda * 86400 * 10^-3 # W M-2 to mm
   ETobs <- df$LE / lambda * 86400 * 10^-3 # W M-2 to mm
+
   # GPPobs = df$GPP_NT;                        # [g C m-2 d-1]
   GPPobs <- df[, .(GPP_DT, GPP_NT)] %>%
     as.matrix() %>%
@@ -47,7 +50,7 @@ tidy_forcing_flux <- function(df) # , par
   Rn <- get_Rn(df$Rs, df$Rl_in, Tavg, df$Albedo, df$Emiss)
   
   # 2. intermediate variables
-  rou_a <- 3.846 * 10^3 * Pa / (Tavg + 273.15) # kg m-3
+  rho_a <- 3.486 * 10^3 * Pa / (1.01 * (Tavg + 273)) # g m-3
   gama <- Cp * Pa / (0.622 * lambda) # kpa deg-1
   slop <- 4098 * 0.6108 * exp((17.27 * Tavg) / (Tavg + 237.3)) / (Tavg + 237.3)^2 # kpa deg-1
   epsilon <- slop / gama
@@ -69,6 +72,6 @@ tidy_forcing_flux <- function(df) # , par
   #     G_soil       = (Tavg-Tavg_1) * 1/0.408*0.38 / (lambda * 1e-3);# MJ /m2/day
   #     G_soil       = G_soil / (1 / lambda*86400*10^-3);# W/m2
   # }
-  out <- data.table(ETobs, GPPobs, Rn, Eeq, lambda, rou_a, gama, epsilon, fval_soil)
+  out <- data.table(ETobs, GPPobs, Rn, Eeq, lambda, rho_a, gama, epsilon, fval_soil)
   cbind(df, out)
 }

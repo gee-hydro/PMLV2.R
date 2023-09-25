@@ -24,7 +24,7 @@ tidy_forcing_flux(df)
 \item lambda
 \item Rn
 \item Eeq
-\item rou_a
+\item rho_a
 \item gama
 \item epsilon
 \item fval_soil
